@@ -1,0 +1,10 @@
+Hallo Robert,
+
+Met deze mail wil ik je graag een update geven over GRADE Vecht:
+
+•	Voor Neerslaggenerator wachten op een definitieve keuze van de herhalingstijd om de GEV-extrapolatie op te baseren. Hier bel ik nog met Hank over (tot nu toe kreeg ik hem nog niet te pakken.)
+•	Voor de OZA hydarulica staat de data: p:\11205237-grade\MODELS\Vecht\SOBEK3_OZA_hydraulica_1D2D\results_20220412\output\read_Qmax_sums_results.xlsx. De Sum51 is de run zonder verandering in het model
+•	Voor de OZA hydrologie is Corine nog bezig. Het doel is dat zij aankomende donderdag jou de data stuurt.
+
+Groeten,
+Tjitske

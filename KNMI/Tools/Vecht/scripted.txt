@@ -1,0 +1,20 @@
+# calculate PET from historical temperature
+for im in $(seq -w 1 36); do cat area0${im}.tg  | ./petf -mtm maand_temperatuur.txt -mpv maand_verdamping.txt  > area0${im}.ev; echo $im; done
+
+# combine 3 files in one
+for im in $(seq -w 1 36); do join area0${im}.pr area0${im}.tg | join - area0${im}.pet | awk '{printf("%10d %8.3f %8.3f %8.3f\n",$1,$2,$3,$4)}' > area0${im}.all; echo $im; done
+
+# creating feature-vectors from a list containing rainfall file names 
+# and number of fine interpolation gridpoints used as weights
+cat area_npt.out | awk '{printf("%s %f\n",$1,$2); sub(/\.pr/,".tg"); printf("%s %f\n",$1,$2)}' | ../programs/fvectors 1951 2006 > ./Vecht_vectors_1951-2006
+
+# backtransform, eneration of long series, given the log-file
+for i in $(seq -w 1 36); do echo area0$i.pr; echo area0$i.tg; done | ./backtran nomem_gvar_50000_pass_sim_v7_fin
+
+# calculate PET from simulated temperature
+simname='nomem_gvar_50000_pass_sim_v7_fin'
+for im in $(seq -w 1 36); do cat area0${im}_${simname}.tg  | ./petf -mtm maand_temperatuur.txt -mpv maand_verdamping.txt  > area0${im}_${simname}.ev; echo $im; done
+
+# writing netcdf 
+./ncGRaDE -sim nomem_gvar_50000_pass_sim_v7_fin_000 -start 20010101 -end 40001231 -offset 2000 -refyear 2001 -list catch1.txt -meta meta 
+
